@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Box Model & Borders Lab</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        section {
+            background: white;
+            margin: 20px auto;
+            padding: 30px;
+            max-width: 1000px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .border-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .b-shorthand {
+            border: 5px solid #3498db;
+        }
+
+        .b-sides {
+            border-top: 5px solid #e74c3c;
+            border-right: 5px solid #f1c40f;
+            border-bottom: 5px solid #2ecc71;
+            border-left: 5px solid #9b59b6;
+        }
+
+        .b-dashed {
+            border: 4px dashed #e67e22;
+        }
+
+        .b-double {
+            border: 6px double #34495e;
+        }
+
+        .b-radius {
+            border: 3px solid #16a085;
+            border-radius: 20px;
+        }
+
+        .b-outline {
+            border: 3px solid #333;
+            outline: 4px solid #e91e63;
+            outline-offset: 4px;
+            margin: 10px;
+        }
+
+        .box-model-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .margin-layer {
+            background-color: #f6cdb8;
+            padding: 40px;
+            border: 1px dashed #e67e22;
+            position: relative;
+            display: inline-block;
+        }
+
+        .border-layer {
+            background-color: #fdeeb3;
+            padding: 10px;
+            border: 1px solid #f1c40f;
+        }
+
+        .padding-layer {
+            background-color: #c4e8d3;
+            padding: 40px;
+            border: 1px dashed #2ecc71;
+        }
+
+        .content-layer {
+            background-color: #aed6f1;
+            width: 320px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid #3498db;
+        }
+
+        .layer-label {
+            position: absolute;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .label-margin { top: 5px; left: 5px; }
+        .explanation {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            color: #555;
+            background: #eee;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .pm-comparison {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .pm-box {
+            width: 300px;
+            border: 2px solid #333;
+            background-color: #fff;
+        }
+
+        .box-padding {
+            padding: 40px;
+            background-color: #e8f8f5;
+        }
+
+        .box-margin {
+            margin: 40px;
+            background-color: #fef9e7;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+            background-color: white;
+            margin: 5px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #3498db;
+        }
+
+        .product-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            color: #27ae60;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .hosting-info {
+            text-align: center;
+            font-family: monospace;
+            background: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CSS Box Model & Layout Lab</h1>
+    </header>
+
+    <section>
+        <h2>Task 1: CSS Border Properties Demo</h2>
+        <div class="border-grid">
+            <div class="card b-shorthand">Border Shorthand<br>(5px solid blue)</div>
+            <div class="card b-sides">Different Sides<br>(Top, Right, Bottom, Left)</div>
+            <div class="card b-dashed">Dashed Border</div>
+            <div class="card b-double">Double Border</div>
+            <div class="card b-radius">Border Radius<br>(Rounded Corners)</div>
+            <div class="card b-outline">Outline vs Border<br>(Pink is outline)</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Task 2: Box Model Visual Explanation</h2>
+        <div class="box-model-container">
+            <div class="margin-layer">
+                <span class="layer-label label-margin">MARGIN (40px)</span>
+                
+                <div class="border-layer">
+                    
+                    <div class="padding-layer">
+                        
+                        <div class="content-layer">
+                            <div>
+                                <strong>CONTENT</strong><br>
+                                Width: 320px
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="explanation">
+            With <code>box-sizing: border-box</code>, padding and border are included in the total width calculation. 
+            <br>
+            <strong>Order: Content → Padding → Border → Margin</strong>
+        </div>
+    </section>
+
+    <section>
+        <h2>Task 3: Padding vs Margin Comparison</h2>
+        <p style="text-align: center;">Notice how the Green box is larger internally, while the Yellow box pushes itself away from neighbors.</p>
+        
+        <div class="pm-comparison">
+            <div class="pm-box box-padding">
+                <h3>Box A (Padding)</h3>
+                <p>I have <strong>40px padding</strong>. This adds space <em>inside</em> the border, making my background area larger and pushing the text inward.</p>
+            </div>
+
+            <div class="pm-box box-margin">
+                <h3>Box B (Margin)</h3>
+                <p>I have <strong>40px margin</strong>. This adds space <em>outside</em> the border, pushing me away from other elements, but my internal size stays small.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Task 4: Product Cards Grid</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <h3>Classic Sneakers</h3>
+                <div class="price">$49.99</div>
+                <p>Comfortable everyday sneakers with durable rubber soles.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <h3>Leather Jacket</h3>
+                <div class="price">$120.00</div>
+                <p>Premium faux leather jacket. Stylish and warm.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <h3>Wireless Headphones</h3>
+                <div class="price">$89.99</div>
+                <p>Noise-cancelling over-ear headphones with 20h battery.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <h3>Smart Watch</h3>
+                <div class="price">$199.50</div>
+                <p>Track your fitness and notifications on the go.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Hosting Info</h2>
+        <p>This project is hosted on GitHub Pages.</p>
+        <div class="hosting-info">
+            <a href="#" style="color: white;">https://your-username.github.io/css-boxmodel-hosting-lab/</a>
+        </div>
+    </section>
+
+</body>
+</html>
